@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Database extends Migration
+class CovidTestDb extends Migration
 {
     /**
      * Run the migrations.
@@ -50,7 +50,6 @@ class Database extends Migration
             $table->dateTime('end_at');
             $table->tinyInteger('score');
             $table->string('comment');
-            $table->unsignedBigInteger('user_id');
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -77,5 +76,10 @@ class Database extends Migration
      */
     public function down()
     {
+        Schema::drop('user_choices');
+        Schema::drop('test_sessions');
+        Schema::drop('choices');
+        Schema::drop('questions');
+    
     }
 }
