@@ -50,7 +50,6 @@ class Database extends Migration
             $table->dateTime('end_at');
             $table->tinyInteger('score');
             $table->string('comment');
-            $table->unsignedBigInteger('user_id');
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
