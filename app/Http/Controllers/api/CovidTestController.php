@@ -18,13 +18,14 @@ class CovidTestController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Init and start new session test.
+     * @arg 
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**

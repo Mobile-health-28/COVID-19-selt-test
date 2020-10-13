@@ -3,7 +3,14 @@
 This is the  backend of the mobile app COVID-19 Self test.
 
 # Description
- API
+ Implemented fonctionalities are:
+ - register new user
+ - login new user
+ - logout a user
+# Documentation for frontend dev
+
+- clone the project
+- run the app localy and go to .../api/documentation
 
 # How to contribute
 
