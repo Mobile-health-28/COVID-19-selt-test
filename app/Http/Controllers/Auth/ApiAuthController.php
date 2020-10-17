@@ -10,18 +10,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-/**
- * @OA\Info(
- *    title="COVID self test application backend",
- *    version="1.0.0",
- * )
- */
-
 class ApiAuthController extends Controller
 {
     /**
  * @OA\Post(
- * path="api/register",
+ * path="/api/register",
  * summary="Create account for new user",
  * description="Create new account ",
  * operationId="authRegister",
@@ -68,7 +61,7 @@ class ApiAuthController extends Controller
 
     /**
  * @OA\Post(
- * path="api/login",
+ * path="/api/login",
  * summary="Sign in",
  * description="Login by email, password",
  * operationId="authLogin",
@@ -78,9 +71,9 @@ class ApiAuthController extends Controller
  *    description="Pass user credentials",
  *    @OA\JsonContent(
  *       required={"email","password"},
- *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
- *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
- *       @OA\Property(property="persistent", type="boolean", example="true"),
+ *       @OA\Property(property="email", type="string", format="email", example="firminapp@gmail.com"),
+ *       @OA\Property(property="password", type="string", format="password", example="passepasse"),
+ *
  *    ),
  * ),
  * @OA\Response(
@@ -105,7 +98,7 @@ class ApiAuthController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
+                $response = ['token' => $token,'user'=> $user];
                 return response($response, 200);
             } else {
                 $response = ["message" => "Password mismatch"];
@@ -117,9 +110,44 @@ class ApiAuthController extends Controller
         }
     }
 
+     /**
+ * @OA\Get(
+ * path="/api/detail",
+ * summary="Get user details",
+ * description="Get user details",
+ * operationId="userDetail",
+ * tags={"auth"},
+ * @OA\Response(
+ *    response=422,
+ *    description="Wrong credentials response",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="User not found")
+ *        )
+ *     )
+ * )
+ */
+public function getByToken (Request $request) {
+   
+
+    $user = $request->auth()->user;
+    if ($user) {
+        if (Hash::check($request->password, $user->password)) {
+            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+            $response = ['token' => $token,'user'=> $user];
+            return response($response, 200);
+        } else {
+            $response = ["message" => "Password mismatch"];
+            return response($response, 422);
+        }
+    } else {
+        $response = ["message" =>'User does not exist'];
+        return response($response, 422);
+    }
+}
+
       /**
  * @OA\Post(
- * path="api/logout",
+ * path="/api/logout",
  * summary="Sign out",
  * description="Log out connected user",
  * operationId="authLogout",

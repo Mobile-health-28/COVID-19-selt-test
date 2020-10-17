@@ -1,11 +1,25 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "COVID self test application backend",
+        "title": "API docuementation of COVID-19 self test application",
+        "description": "API docuementation of COVID-19 self test application",
+        "contact": {
+            "email": "firminapp@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost/COVID-19-selt-test/public",
+            "description": "COVID-19 app backend server"
+        }
+    ],
     "paths": {
-        "api/register": {
+        "/api/register": {
             "post": {
                 "tags": [
                     "auth"
@@ -73,7 +87,7 @@
                 }
             }
         },
-        "api/login": {
+        "/api/login": {
             "post": {
                 "tags": [
                     "auth"
@@ -95,16 +109,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "firminapp@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "PassWord12345"
-                                    },
-                                    "persistent": {
-                                        "type": "boolean",
-                                        "example": "true"
+                                        "example": "passepasse"
                                     }
                                 },
                                 "type": "object"
@@ -132,7 +142,35 @@
                 }
             }
         },
-        "api/logout": {
+        "/api/detail": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get user details",
+                "description": "Get user details",
+                "operationId": "userDetail",
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
             "post": {
                 "tags": [
                     "auth"

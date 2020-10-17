@@ -27,7 +27,7 @@ Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\C
     Route::post('/login', 'ApiAuthController@login')->name('login.api');
     Route::post('/register','ApiAuthController@register')->name('register.api');
     Route::post('/logout', 'ApiAuthController@logout')->name('logout.api');
-
+    Route::get('/detail', 'ApiAuthController@getByToken')->name('profile.api');
     // ...
 
 });
