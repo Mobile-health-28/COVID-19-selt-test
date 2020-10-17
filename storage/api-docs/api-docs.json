@@ -142,24 +142,37 @@
                 }
             }
         },
-        "/api/detail": {
+        "/api/user/{id}": {
             "get": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Get user details",
-                "description": "Get user details",
+                "summary": "Get user infos",
+                "description": "Get user's infos",
                 "operationId": "userDetail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User's Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
                 "responses": {
                     "422": {
-                        "description": "Wrong credentials response",
+                        "description": "No User founded",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "User not found"
+                                            "example": "User not founded"
                                         }
                                     },
                                     "type": "object"
@@ -167,7 +180,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/api/logout": {

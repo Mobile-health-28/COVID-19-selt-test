@@ -110,35 +110,40 @@ class ApiAuthController extends Controller
         }
     }
 
-     /**
+/**
  * @OA\Get(
- * path="/api/detail",
- * summary="Get user details",
- * description="Get user details",
+ * path="/api/user/{id}",
+ * summary="Get user infos",
+ * description="Get user's infos",
  * operationId="userDetail",
  * tags={"auth"},
- * @OA\Response(
+ * security={ {"bearer": {} }},
+ * @OA\Parameter(
+ *    description="User's Id",
+ *    in="path",
+ *    name="id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
+ *    )
+ * ),
+ * * @OA\Response(
  *    response=422,
- *    description="Wrong credentials response",
+ *    description="No User founded",
  *    @OA\JsonContent(
- *       @OA\Property(property="message", type="string", example="User not found")
+ *       @OA\Property(property="message", type="string", example="User not founded")
  *        )
  *     )
  * )
  */
-public function getByToken (Request $request) {
+public function getByToken (Request $request,$id) {
    
 
-    $user = $request->auth()->user;
+    $user = User::find($id);
     if ($user) {
-        if (Hash::check($request->password, $user->password)) {
-            $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-            $response = ['token' => $token,'user'=> $user];
-            return response($response, 200);
-        } else {
-            $response = ["message" => "Password mismatch"];
-            return response($response, 422);
-        }
+        return $user;
     } else {
         $response = ["message" =>'User does not exist'];
         return response($response, 422);
