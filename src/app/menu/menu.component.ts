@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faAlignJustify, faClosedCaptioning, faRemoveFormat, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { routesName } from '../shared/routes';
+import { routesName } from '../shared/app.config';
 
 @Component({
   selector: 'app-menu',

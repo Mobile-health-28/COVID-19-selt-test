@@ -2,7 +2,7 @@
   <carousel cellWidth="100%" cellsToShow="1" dots="true" style="">
     <div *ngFor="let item of carouselItems" class="carousel-cell">
         <div class="step">
-          <img src="{{ item.image }}" alt="" />
+          <fa-icon [icon]="item?.icon" class="icon"></fa-icon>
           <h3 class="title">{{item.title}}</h3>
           <p class="description">{{item.desc}}</p>
         </div>
