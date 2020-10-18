@@ -8,97 +8,10 @@
 </head>
 
 <body>
-    <div class="page page-start">
-        <div class="step-container">
-
-            <div class="step">
-                <img src="" alt="">
-                <h3 class="title">wear mask</h3>
-                <p class="description">it reduces you risk of getting the virus</p>
-            </div>
-            <div class="step">
-                <img src="" alt="">
-                <h3 class="title">wash you hand</h3>
-                <p class="description">it reduces you risk of getting the virus</p>
-            </div>
-            <div class="step">
-                <img src="" alt="">
-                <h3 class="title">use hand sanitizer</h3>
-                <p class="description">it reduces you risk of getting the virus</p>
-            </div>
-        </div>
-
-        <div class="btn-container">
-            <button class="btn btn-start">get started</button>
-        </div>
-
-    </div>
-    <div class="page page-signup">
-        <div class="page-hero"></div>
-        <div class="form-container">
-            <form action="">
-
-                <div class="form-group">
-                    <label for="">name</label>
-                    <input type="text" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label for="">user name</label>
-                    <input type="text" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label for="">mobile number</label>
-                    <input type="text" class="form-control">
-                </div>
-                
-                <div class="form-group">
-                    <label for="">password</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="btn-container">
-                    <button class="btn btn-from btn-signup">sign up</button>
-                </div>
-                
-            </form>
-            <div class="spacer">
-                <span>or</span>
-            </div>
-            <div class="btn-container">
-                <button class="btn btn-pager btn-login">login</button>
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="page page-login">
-        <div class="page-hero"></div>
-        <div class="form-container">
-            <form action="">
-                <div class="form-group">
-                    <label for="">user name</label>
-                    <input type="text" class="form-control">
-                </div>
-                                
-                <div class="form-group">
-                    <label for="">password</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="btn-container">
-                    <button class="btn btn-from btn-login">login</button>
-                </div>
-                
-            </form>
-            <div class="spacer">
-                <span>or</span>
-            </div>
-            <div class="btn-container">
-                <button class="btn btn-pager btn-signup">sign up</button>
-            </div>
-            
-        </div>
-    </div>
+    <header>
+        <app-menu></app-menu>
+    </header>
+    <router-outlet></router-outlet>
 </body>
 
 </html>

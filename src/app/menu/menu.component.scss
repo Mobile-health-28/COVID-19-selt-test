@@ -1,0 +1,84 @@
+
+@keyframes leftToRight{
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 0;
+    }
+}
+.menu{
+    background: white;
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    height: 100vh;
+    top: 0;
+    min-width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    &-show{
+        animation: leftToRight linear .5s;
+        display: block;
+    }
+    &-hide{
+        display: none;
+    }
+    &-profile{
+        text-align: center;
+        .photo{
+            margin: 15px auto;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .full-name{
+            margin: 15px auto;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+    }
+    &-items{
+        padding: 10px;
+        position: relative;
+        &::before{
+            content: "";
+            border-bottom: solid rgba(99, 99, 99, 0.5) 1px;
+            position: absolute;
+            width: 70%;
+            top: 0;
+            left: 15%;
+            right: 15%;
+        }
+    }
+    &-item{
+        &::first-letter{
+            text-transform: capitalize;
+        }
+        text-transform: lowercase;
+        padding: 5px 10px;
+    }
+}
+.btn {
+    border-radius: 0;
+    background: transparent;
+    
+    &-link {
+        //box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+        &:hover{
+            background: rgb(240, 240, 240);
+        }
+    }
+    &-menu{
+        width: auto;
+        color: white;
+        padding: 15px;
+    }
+    &-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        padding: 10px 20px;
+    }
+}

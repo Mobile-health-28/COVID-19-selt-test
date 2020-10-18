@@ -1,1 +1,18 @@
-<p>menu works!</p>
+<button class="btn btn-menu" (click)='menuVisibility()'>
+  <fa-icon [icon]="icons?.menu"></fa-icon>
+</button>
+<div [ngClass] =' isHidden ? "menu-hide": "menu-show" ' class="menu">
+  <button class="btn btn-close" (click)='menuVisibility()'>
+    <fa-icon  [icon]="icons?.close"></fa-icon>
+  </button>
+  <div class="menu-profile">
+    <div class="photo">
+      <img src="" alt="" />
+    </div>
+    <div class="full-name">hamid outm</div>
+    <button class="btn btn-link">edit profile</button>
+  </div>
+  <ul class="menu-items">
+    <li class="menu-item" *ngFor="let item of menuItems">{{ item.title }}</li>
+  </ul>
+</div>
