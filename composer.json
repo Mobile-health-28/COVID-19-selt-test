@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "Covid-19 self test",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Covid-19 self test app backend.",
+    "authors": "Kpapou BANIGANTE",
     "keywords": [
-        "framework",
-        "laravel"
+        "COVID-19",
+        "GADS"
     ],
     "license": "MIT",
     "require": {

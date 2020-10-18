@@ -491,6 +491,24 @@
             }
         }
     },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "http",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/COVID-19-selt-test/public/oauth/authorize",
+                        "tokenUrl": "http://localhost/COVID-19-selt-test/public/oauth/token",
+                        "refreshUrl": "http://localhost/COVID-19-selt-test/public/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
     "security": [
         []
     ]
