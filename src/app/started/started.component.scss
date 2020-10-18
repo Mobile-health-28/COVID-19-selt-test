@@ -3,45 +3,41 @@ $light-green: #307330;
 $color-gold: gold;
 
 .page-start {
-    background: linear-gradient($dark-green, $light-green);
-    padding: 15px;
-    .btn {
-        &-container {
-            text-align: center;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
+  background: linear-gradient($dark-green, $light-green);
+  padding: 15px;
+  margin-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+  .btn {
+    &-container {
+      text-align: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
-    .step-container {
-        padding: 30px;
-        .step {
-            height: 375px;
-            background: $light-green;
-            border-radius: 50px;
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            .title,
-            .description {
-                text-align: center;
-                color: white;
-            }
-            .title {
-                font-size: 20px;
-                margin: 15px 0;
-            }
-            .description {
-                margin: 0;
-            }
-            img {
-                flex: 1;
-                border: red solid;
-            }
-            &:not(:first-child) {
-                display: none;
-            }
-        }
+  }
+  .step {
+    display: flex;
+    flex-direction: column;
+    .title,
+    .description {
+      text-align: center;
+      color: white;
     }
+    .title {
+      font-size: 20px;
+      margin: 15px 0;
+    }
+    .description {
+      margin: 0;
+    }
+    img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      height: 50vh;
+    }
+  }
 }

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent, SignupComponent, StartedComponent,MenuComponent } from './shared/pages'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
+    IvyCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

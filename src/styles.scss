@@ -3,115 +3,124 @@ $light-green: #307330;
 $color-gold: gold;
 
 body {
-    margin: 0;
+  margin: 0;
 }
-header{
-    background: $dark-green;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    left: 0;
-    height: 50px;
+header {
+  background: $dark-green;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 50px;
 }
 @mixin authForm {
-    display: flex;
-    flex-direction: column;
-    .form {
-        &-container {
-            //flex: 1;
-            background: linear-gradient($dark-green, $light-green);
-            border-top-right-radius: 30px;
-            border-top-left-radius: 30px;
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
+  display: flex;
+  flex-direction: column;
+  .form {
+    &-container {
+      //flex: 1;
+      background: linear-gradient($dark-green, $light-green);
+      border-top-right-radius: 30px;
+      border-top-left-radius: 30px;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
-    .spacer {
-        text-align: center;
-        text-transform: capitalize;
-        position: relative;
-        font-size: 20px;
-        padding: 15px 0;
-        &::before,
-        &::after {
-            content: "";
-            height: 1px;
-            background: white;
-            width: 40%;
-            position: absolute;
-            top: 25px;
-        }
-        &::after {
-            left: 15px;
-        }
-        &::before {
-            right: 15px;
-        }
+  }
+  .spacer {
+    text-align: center;
+    text-transform: capitalize;
+    position: relative;
+    font-size: 20px;
+    padding: 15px 0;
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      background: white;
+      width: 40%;
+      position: absolute;
+      top: 25px;
     }
-    .btn {
-        &-container {
-            margin-top: 15px;
-            text-align: center;
-        }
+    &::after {
+      left: 15px;
     }
+    &::before {
+      right: 15px;
+    }
+  }
+  .btn {
+    &-container {
+      margin-top: 15px;
+      text-align: center;
+    }
+  }
 }
 
 .btn {
-    max-width: 200px;
-    width: 100%;
-    font-size: 18px;
-    padding: 5px;
-    border-radius: 25px;
-    outline: none;
-    border: none;
-    text-transform: capitalize;
-    color: black;
-    background: $color-gold;
-    font-weight: 600;
-    &-pager {
-        background: white;
-    }
+  max-width: 200px;
+  width: 100%;
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  color: black;
+  background: $color-gold;
+  font-weight: 600;
+  &-pager {
+    background: white;
+  }
 }
 .hide {
-    display: none;
+  display: none;
 }
 .page {
-    min-height: 100vh;    
-    &-hero {
-        min-height: 200px;
-        flex: 1;
-        background: white;
-    }
-    &-signup,
-    &-login {
-      @include authForm()
-    }
+  min-height: 100vh;
+  &-hero {
+    min-height: 200px;
+    flex: 1;
+    background: white;
+  }
+  &-signup,
+  &-login {
+    @include authForm();
+  }
 }
 
 .form {
-    &-group {
-        margin: 0 15px 15px;
-        position: relative;
-        display: block;
-        label {
-            font-size: 16px;
-            text-transform: capitalize;
-            color: white;
-            position: absolute;
-            top: 15px;
-            left: 5px;
-        }
+  &-group {
+    margin: 0 15px 15px;
+    position: relative;
+    display: block;
+    label {
+      font-size: 16px;
+      text-transform: capitalize;
+      color: white;
+      position: absolute;
+      top: 15px;
+      left: 5px;
     }
-    &-control {
-        border: none;
-        width: 100%;
-        max-width: 100%;
-        font-size: 16px;
-        background: transparent;
-        border-bottom: solid 1px white;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        outline: none;
-        color: white;
-    }
+  }
+  &-control {
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    font-size: 16px;
+    background: transparent;
+    border-bottom: solid 1px white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    outline: none;
+    color: white;
+  }
+}
+
+.carousel {
+  flex: 0.5;
+  &-cell {
+    display: flex;
+    flex-direction: column;
+    background: $light-green;
+  }
 }

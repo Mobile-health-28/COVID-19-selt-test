@@ -8,7 +8,7 @@ import { routesName } from './shared/routes';
   { path: routesName.login, component: LoginComponent }, 
   { path: routesName.signup, component: SignupComponent }, 
   { path: routesName.started, component: StartedComponent },
-  { path: '', redirectTo: routesName.login,  pathMatch: 'full'}
+  { path: '', redirectTo: routesName.started,  pathMatch: 'full'}
 ]; 
 
 @NgModule({

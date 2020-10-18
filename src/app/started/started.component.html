@@ -1,23 +1,15 @@
 <div class="page page-start">
-  <div class="step-container">
-    <div class="step">
-      <img src="" alt="" />
-      <h3 class="title">wear mask</h3>
-      <p class="description">it reduces you risk of getting the virus</p>
+  <carousel cellWidth="100%" cellsToShow="1" dots="true" style="">
+    <div *ngFor="let item of carouselItems" class="carousel-cell">
+        <div class="step">
+          <img src="{{ item.image }}" alt="" />
+          <h3 class="title">{{item.title}}</h3>
+          <p class="description">{{item.desc}}</p>
+        </div>
     </div>
-    <div class="step">
-      <img src="" alt="" />
-      <h3 class="title">wash you hand</h3>
-      <p class="description">it reduces you risk of getting the virus</p>
-    </div>
-    <div class="step">
-      <img src="" alt="" />
-      <h3 class="title">use hand sanitizer</h3>
-      <p class="description">it reduces you risk of getting the virus</p>
-    </div>
-  </div>
+  </carousel>
 
   <div class="btn-container">
-    <button class="btn btn-start">get started</button>
+    <button class="btn btn-start" (click)="loginPage()">get started</button>
   </div>
 </div>
