@@ -31,7 +31,6 @@ class CovidTestDb extends Migration
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('question_id');
-            $table->unsignedBigInteger('test_session_id');
             $table->timestamps();
             $table->softDeletes();
              $table->foreign('question_id')->references('id')->on('questions');

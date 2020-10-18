@@ -164,7 +164,7 @@ public function getByToken (Request $request,$id) {
  *    ),
  * ),
  * @OA\Response(
- *    response=422,
+ *    response=404,
  *    description="No user founded",
  *    @OA\JsonContent(
  *       @OA\Property(property="message", type="string", example="User not found")

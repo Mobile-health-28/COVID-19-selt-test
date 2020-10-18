@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,13 +8,30 @@ use Illuminate\Http\Request;
 class CovidTestController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     *Start new self test session
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+  /**
+ * @OA\Get(
+ * path="/api/selftest",
+ * summary="Start new self test session",
+ * description="Start new self test session",
+ * operationId="selftestSession",
+ * tags={"Selftest"},
+ * security={ {"bearer": {} }},
+ * * @OA\Response(
+ *    response=422,
+ *    description="No User founded",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Not founded")
+ *        )
+ *     )
+ * )
+ */
+    public function index(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -36,7 +53,7 @@ class CovidTestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

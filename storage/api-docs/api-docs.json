@@ -206,7 +206,7 @@
                     }
                 },
                 "responses": {
-                    "422": {
+                    "404": {
                         "description": "No user founded",
                         "content": {
                             "application/json": {
@@ -215,6 +215,271 @@
                                         "message": {
                                             "type": "string",
                                             "example": "User not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/selftest": {
+            "get": {
+                "tags": [
+                    "Selftest"
+                ],
+                "summary": "Start new self test session",
+                "description": "Start new self test session",
+                "operationId": "selftestSession",
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/question": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get questions",
+                "description": "Get questions",
+                "operationId": "questions",
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "create a question",
+                "description": "create a question",
+                "operationId": "question",
+                "requestBody": {
+                    "description": "create a question",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "short_description",
+                                    "long_description"
+                                ],
+                                "properties": {
+                                    "short_description": {
+                                        "type": "string"
+                                    },
+                                    "long_description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/{id}": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get question by id",
+                "description": "Get question by id ",
+                "operationId": "questionGetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Question id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/questions/{id}/choices": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Add choices to a question",
+                "description": "Add choices to a question",
+                "operationId": "Questions",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Question id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add choices to a question",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "label"
+                                ],
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "is_correct": {
+                                        "type": "integer"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/create": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Create questions and choices",
+                "description": "Create questions and choices ",
+                "operationId": "question",
+                "requestBody": {
+                    "description": "Create questions with choices",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
                                         }
                                     },
                                     "type": "object"

@@ -31,3 +31,13 @@ Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\C
     // ...
 
 });
+Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
+
+   Route::resource('question', 'CovidTestQuestionController');
+   Route::post('/questions/create', 'CovidTestQuestionController@loaFromJson')->name('import.api');
+   Route::post('/questions/{id}/choices', 'CovidTestQuestionController@addChoices')->name('addChoice.api');
+   Route::get('/questions/{id}', 'CovidTestQuestionController@getByQuestionId')->name('getQuestion.api');
+
+   Route::resource('selftest', 'CovidTestController');
+
+});

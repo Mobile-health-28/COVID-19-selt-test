@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TestSession extends Model
 {
     use HasFactory;
+    protected $fillable=["user_id","start_at","end_at","score","comment"];
+   
 }
