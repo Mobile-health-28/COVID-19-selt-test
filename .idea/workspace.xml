@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5801c24e-7e57-4460-9aec-6822eb3531a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="5801c24e-7e57-4460-9aec-6822eb3531a9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -208,8 +206,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603130279166</updated>
-      <workItem from="1603130280896" duration="3730000" />
+      <workItem from="1603130280896" duration="5127000" />
     </task>
+    <task id="LOCAL-00001" summary="Updated API_DOCS with location tracking data">
+      <created>1603135398842</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603135398843</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +234,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Just another commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just another commit" />
+    <MESSAGE value="Updated API_DOCS with location tracking data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated API_DOCS with location tracking data" />
   </component>
   <component name="WindowStateProjectService">
     <state x="314" y="59" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603130625281">
