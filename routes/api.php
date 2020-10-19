@@ -19,9 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     
 });
 
-Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\Controllers\Auth'], function () {
-
-    // ...
+Route::group(['middleware' => ['api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
 
     // public routes
     Route::post('/login', 'ApiAuthController@login')->name('login.api');
@@ -31,7 +29,7 @@ Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\C
     // ...
 
 });
-Route::group(['middleware' => [ 'cors','json.response'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
+Route::group(['middleware' => [ 'api'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
 
    Route::resource('question', 'CovidTestQuestionController');
    Route::post('/questions/create', 'CovidTestQuestionController@loaFromJson')->name('import.api');

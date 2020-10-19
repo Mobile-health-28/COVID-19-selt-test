@@ -42,8 +42,12 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+          
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\Cors::class,
+            \App\Http\Middleware\ForceJsonResponse::class,
+            \App\Http\Middleware\TrimStrings::class,
         ],
     ];
 
