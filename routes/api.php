@@ -16,12 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-    
+
 });
 
 Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\Controllers\Auth'], function () {
-
-    // ...
 
     // public routes
     Route::post('/login', 'ApiAuthController@login')->name('login.api');
@@ -30,4 +28,8 @@ Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\C
 
     // ...
 
+});
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('location', "LocationTracker");
 });
