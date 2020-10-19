@@ -2,7 +2,7 @@
     "name": "Covid-19 self test",
     "type": "project",
     "description": "Covid-19 self test app backend.",
-    "authors": "Kpapou BANIGANTE",
+    "authors": [{"name":"Kpapou BANIGANTE","email": "firminapp@gmail.com"}],
     "keywords": [
         "COVID-19",
         "GADS"
