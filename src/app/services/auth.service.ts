@@ -10,8 +10,8 @@ import { apiEndPoint } from '../shared/app.config';
 export class AuthService {
   constructor(private http:HttpClient) { }
 
-  login(username,password) {
-    return this.http.post(apiEndPoint.login,{username,password})
+  login(email,password) {
+    return this.http.post(apiEndPoint.login,{email , password})
   }
   register(user:Iuser){
     return this.http.post(apiEndPoint.register,user);

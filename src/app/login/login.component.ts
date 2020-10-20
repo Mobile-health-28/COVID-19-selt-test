@@ -14,11 +14,11 @@ export class LoginComponent implements OnInit {
   loginForm: any;
   constructor(private router: Router, private auth: AuthService) {
     this.loginForm = new FormGroup({
-      username: new FormControl('user1@mail.com', [
+      email: new FormControl('firminapp@gmail.com', [
         Validators.email,
         Validators.required,
       ]),
-      password: new FormControl('PassWord12345', [Validators.required]),
+      password: new FormControl('passepasse', [Validators.required]),
     });
   }
 
@@ -32,11 +32,15 @@ export class LoginComponent implements OnInit {
     let values = this.loginForm.value;
     console.error(this.loginForm.valid, values);
     if (this.loginForm.valid) {
-      this.auth.login(values.username, values.password).subscribe(
+      this.auth.login(values.email, values.password).subscribe(
         (res) => {
+
           console.error(res);
         },
-        (error) => {}
+        (error: HttpErrorResponse) => {
+          //to show error
+          console.error(error);
+        }
       );
     }
   }

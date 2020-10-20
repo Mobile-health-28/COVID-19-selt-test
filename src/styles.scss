@@ -94,12 +94,12 @@ header {
     position: relative;
     display: block;
     label {
-      font-size: 16px;
+      font-size: 12px;
       text-transform: capitalize;
       color: white;
       position: absolute;
-      top: 15px;
-      left: 5px;
+      top: 0;
+      left: 0x;
     }
   }
   &-control {

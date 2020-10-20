@@ -3,11 +3,11 @@
   <div class="form-container">
     <form action="" [formGroup]="loginForm">
       <div class="form-group">
-        <label for="">user name</label>
-        <input type="text" formControlName="username" class="form-control" />
-        <div class="error" *ngIf="(loginForm.dirty || loginForm.touched) && loginForm.controls.username.invalid">
-          <p *ngIf="loginForm.controls.username.errors.required">Field required</p>
-          <p *ngIf="loginForm.controls.username.errors.email">valid email required</p>
+        <label for="">Email</label>
+        <input type="text" formControlName="email" class="form-control" />
+        <div class="error" *ngIf="(loginForm.dirty || loginForm.touched) && loginForm.controls.email.invalid">
+          <p *ngIf="loginForm.controls.email.errors.required">Field required</p>
+          <p *ngIf="loginForm.controls.email.errors.email">valid email required</p>
         </div>
       </div>
 

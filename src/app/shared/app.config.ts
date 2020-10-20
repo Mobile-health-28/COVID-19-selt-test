@@ -12,4 +12,8 @@ export const apiEndPoint = {
   logout: apiBaseUrl + '/logout',
   register: apiBaseUrl + '/register',
   user: apiBaseUrl + '/register/',
+  get_questions : apiBaseUrl+'/question',
+  get_question : apiBaseUrl+'/questions/',
+  get_choices : '/choices', /* url/questions/id/choices */
+
 };

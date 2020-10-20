@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   signupForm: any;
   constructor(private router: Router, private auth: AuthService) {
     this.signupForm = new FormGroup({
-      username: new FormControl('user1@mail.com', [
+      email: new FormControl('user1@mail.com', [
         Validators.email,
         Validators.required,
       ]),
@@ -28,13 +28,17 @@ export class SignupComponent implements OnInit {
   }
   submit() {
     let values = this.signupForm.value;
-    console.error(this.signupForm.valid, values);
     if (this.signupForm.valid) {
-      this.auth.login(values.username, values.password).subscribe(
+      console.error(values);
+      values.persistent = true;
+      this.auth.register(values).subscribe(
         (res) => {
-          console.error(res);
+          console.warn(res);
         },
-        (error) => {}
+        (error) => {
+          console.error(values,error);
+          
+        }
       );
     }
   }
