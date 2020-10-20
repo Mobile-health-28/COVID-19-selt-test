@@ -225,10 +225,43 @@
                 }
             }
         },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get all users",
+                "description": "Get all users",
+                "operationId": "userGetAll",
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Users not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/selftest": {
             "get": {
                 "tags": [
-                    "Selftest"
+                    "Self-Test Session"
                 ],
                 "summary": "Start new self test session",
                 "description": "Start new self test session",
@@ -256,6 +289,156 @@
                         "bearer": []
                     }
                 ]
+            }
+        },
+        "/api/questions/endtest/{id}": {
+            "post": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Create questions and choices",
+                "description": "Create questions and choices ",
+                "operationId": "question",
+                "requestBody": {
+                    "description": "End session and get results",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/answers": {
+            "post": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Send answers of multiple questions",
+                "description": "Send answers of multiple questions ",
+                "operationId": "ansewrId",
+                "requestBody": {
+                    "description": "Send answers of all questions",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/{id}/answer": {
+            "post": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Send answers of a specific question",
+                "description": "Send answers of a specific question ",
+                "operationId": "ansewrId",
+                "requestBody": {
+                    "description": "Send answers of all questions",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "question_id",
+                                    "choice_id",
+                                    "test_session_id"
+                                ],
+                                "properties": {
+                                    "question_id": {
+                                        "type": "string"
+                                    },
+                                    "choice_id": {
+                                        "type": "string"
+                                    },
+                                    "test_session_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/question": {

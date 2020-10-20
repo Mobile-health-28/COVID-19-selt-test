@@ -166,7 +166,7 @@ public function addChoices(ChoiceRequest $request, $id)
     if($request->validated())
     $data=["label"=>$request->label,
     "question_id"=>$request->question_id,
-    "weght"=>isset($request->weght)?$request->weght:0,
+    "weght"=>isset($request->weight)?$request->weight:0,
     "comment"=>isset($request->comment)?$request->comment:'',
 
 ];

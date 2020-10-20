@@ -178,4 +178,25 @@ public function getByToken (Request $request,$id) {
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
     }
+  /**
+ * @OA\Get(
+ * path="/api/users",
+ * summary="Get all users",
+ * description="Get all users",
+ * operationId="userGetAll",
+ * tags={"auth"},
+ * security={ {"bearer": {} }},
+ * * @OA\Response(
+ *    response=422,
+ *    description="No User founded",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Users not founded")
+ *        )
+ *     )
+ * )
+ */
+
+    public function getUsers(){
+        return User::all();
+    }
 }

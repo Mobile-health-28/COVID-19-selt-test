@@ -29,7 +29,14 @@ Route::group(['middleware' => ['api'],'namespace'=>'App\Http\Controllers\Auth'],
     // ...
 
 });
-Route::group(['middleware' => [ 'api'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
+Route::group(['middleware' => ['auth:api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
+
+    Route::get('/user/{id}', 'ApiAuthController@getByToken')->name('profile.api');
+    Route::get('/users', 'ApiAuthController@getUsers')->name('users.api');
+  
+
+});
+Route::group(['middleware' => [ 'auth:api'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
 
    Route::resource('question', 'CovidTestQuestionController');
    Route::post('/questions/create', 'CovidTestQuestionController@loaFromJson')->name('import.api');
@@ -37,5 +44,9 @@ Route::group(['middleware' => [ 'api'],'namespace'=>'App\Http\Controllers\api\v1
    Route::get('/questions/{id}', 'CovidTestQuestionController@getByQuestionId')->name('getQuestion.api');
 
    Route::resource('selftest', 'CovidTestController');
+
+   Route::post('/questions/endtest/{id}', 'CovidTestController@endSession')->name('endTest.api');
+   Route::post('/questions/answers', 'CovidTestController@sendAnswers')->name('senAswers.api');
+   Route::post('/questions/{id}/answer', 'CovidTestController@sendAnswer')->name('endTest.api');
 
 });
