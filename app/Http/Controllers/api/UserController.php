@@ -33,7 +33,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function rigister(Request $request)
+    public function register(Request $request)
     {
         //
     }
