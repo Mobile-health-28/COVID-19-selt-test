@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-
 });
 
 Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\Controllers\Auth'], function () {
@@ -24,12 +23,14 @@ Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\C
     // public routes
     Route::post('/login', 'ApiAuthController@login')->name('login.api');
     Route::post('/register','ApiAuthController@register')->name('register.api');
-    Route::post('/logout', 'ApiAuthController@logout')->name('logout.api');
+    Route::post('/logout', 'ApiAuthController@logout')->name('logout.api')->middleware('auth:api');
 
     // ...
 
 });
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::resource('location', "LocationTracker");
+Route::group(['middleware' => ['auth:api', 'cors', 'json.response'], 'namespace'=>'App\Http\Controllers'], function(){
+    Route::resource('location', "LocationTracker")->except([
+        'update', 'edit', 'create', 'destroy'
+    ]);
 });
