@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "api/register": {
+        "/api/register": {
             "post": {
                 "tags": [
                     "auth"
@@ -73,7 +73,7 @@
                 }
             }
         },
-        "api/login": {
+        "/api/login": {
             "post": {
                 "tags": [
                     "auth"
@@ -132,7 +132,7 @@
                 }
             }
         },
-        "api/logout": {
+        "/api/logout": {
             "post": {
                 "tags": [
                     "auth"
@@ -145,7 +145,17 @@
                     "required": true,
                     "content": {
                         "application/json": {
-                            "schema": {}
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
                 },
@@ -169,26 +179,17 @@
                 }
             }
         },
-        "api/location": {
-            "post": {
+        "/api/location": {
+            "get": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Add a new location visited",
-                "description": "Endpoint used to add new visited location",
-                "operationId": "authLocationPost",
+                "summary": "Returns all previous locations visited",
+                "description": "Endpoint used to get all visited locations",
+                "operationId": "authLocationGet",
                 "requestBody": {
-                    "description": "Not yet implemented",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [],
-                                "properties": {},
-                                "type": "object"
-                            }
-                        }
-                    }
+                    "description": "Will return objects containing the location details",
+                    "required": false
                 },
                 "responses": {
                     "403": {
@@ -199,7 +200,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Permission access denied"
+                                            "example": "Permission Denied"
                                         }
                                     },
                                     "type": "object"
@@ -209,21 +210,35 @@
                     }
                 }
             },
-            "get": {
+            "post": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Returns all previous locations visited",
-                "description": "Endpoint used to get all visited location",
-                "operationId": "authLocationGet",
+                "summary": "Add a new location visited",
+                "description": "Endpoint used to add new visited location after spending at-least an hour in the vicinity",
+                "operationId": "authLocationPost",
                 "requestBody": {
-                    "description": "Not yet implemented",
+                    "description": "Location data payload",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [],
-                                "properties": {},
+                                "required": [
+                                    "longitude",
+                                    "latitude"
+                                ],
+                                "properties": {
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "32.01547"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "-2.01547"
+                                    }
+                                },
                                 "type": "object"
                             }
                         }
@@ -238,13 +253,41 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Permission access denied"
+                                            "example": "Permission Denied"
                                         }
                                     },
                                     "type": "object"
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "200": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "json",
+                                    "example": "[]"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "204": {
+                "description": "Location Added",
+                "content": {
+                    "application/json": {
+                        "schema": {}
                     }
                 }
             }
