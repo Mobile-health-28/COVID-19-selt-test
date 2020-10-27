@@ -1,9 +1,23 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "COVID self test application backend",
+        "title": "API docuementation of COVID-19 self test application",
+        "description": "API docuementation of COVID-19 self test application",
+        "contact": {
+            "email": "firminapp@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost/COVID-19-selt-test/public",
+            "description": "COVID-19 app backend server"
+        }
+    ],
     "paths": {
         "/api/register": {
             "post": {
@@ -95,16 +109,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "firminapp@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "PassWord12345"
-                                    },
-                                    "persistent": {
-                                        "type": "boolean",
-                                        "example": "true"
+                                        "example": "passepasse"
                                     }
                                 },
                                 "type": "object"
@@ -130,6 +140,52 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Get user infos",
+                "description": "Get user's infos",
+                "operationId": "userDetail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User's Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/api/logout": {
@@ -160,7 +216,7 @@
                     }
                 },
                 "responses": {
-                    "422": {
+                    "404": {
                         "description": "No user founded",
                         "content": {
                             "application/json": {
@@ -179,28 +235,24 @@
                 }
             }
         },
-        "/api/location": {
+        "/api/users": {
             "get": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Returns all previous locations visited",
-                "description": "Endpoint used to get all visited locations",
-                "operationId": "authLocationGet",
-                "requestBody": {
-                    "description": "Will return objects containing the location details",
-                    "required": false
-                },
+                "summary": "Get all users",
+                "description": "Get all users",
+                "operationId": "userGetAll",
                 "responses": {
-                    "403": {
-                        "description": "Not Authorized",
+                    "422": {
+                        "description": "No User founded",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Permission Denied"
+                                            "example": "Users not founded"
                                         }
                                     },
                                     "type": "object"
@@ -208,35 +260,67 @@
                             }
                         }
                     }
-                }
-            },
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/selftest": {
+            "get": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Start new self test session",
+                "description": "Start new self test session",
+                "operationId": "selftestSession",
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/questions/endtest/{id}": {
             "post": {
                 "tags": [
-                    "auth"
+                    "Self-Test Session"
                 ],
-                "summary": "Add a new location visited",
-                "description": "Endpoint used to add new visited location after spending at-least an hour in the vicinity",
-                "operationId": "authLocationPost",
+                "summary": "Create questions and choices",
+                "description": "Create questions and choices ",
+                "operationId": "question",
                 "requestBody": {
-                    "description": "Location data payload",
-                    "required": true,
+                    "description": "End session and get results",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "longitude",
-                                    "latitude"
+                                    "data"
                                 ],
                                 "properties": {
-                                    "longitude": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "32.01547"
-                                    },
-                                    "latitude": {
-                                        "type": "number",
-                                        "format": "float",
-                                        "example": "-2.01547"
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
                                     }
                                 },
                                 "type": "object"
@@ -245,15 +329,350 @@
                     }
                 },
                 "responses": {
-                    "403": {
-                        "description": "Not Authorized",
+                    "422": {
+                        "description": "Bad request",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Permission Denied"
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/answers": {
+            "post": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Send answers of multiple questions",
+                "description": "Send answers of multiple questions ",
+                "operationId": "ansewrId",
+                "requestBody": {
+                    "description": "Send answers of all questions",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/{id}/answer": {
+            "post": {
+                "tags": [
+                    "Self-Test Session"
+                ],
+                "summary": "Send answers of a specific question",
+                "description": "Send answers of a specific question ",
+                "operationId": "ansewrId",
+                "requestBody": {
+                    "description": "Send answers of all questions",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "question_id",
+                                    "choice_id",
+                                    "test_session_id"
+                                ],
+                                "properties": {
+                                    "question_id": {
+                                        "type": "string"
+                                    },
+                                    "choice_id": {
+                                        "type": "string"
+                                    },
+                                    "test_session_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/question": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get questions",
+                "description": "Get questions",
+                "operationId": "questions",
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "create a question",
+                "description": "create a question",
+                "operationId": "question",
+                "requestBody": {
+                    "description": "create a question",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "short_description",
+                                    "long_description"
+                                ],
+                                "properties": {
+                                    "short_description": {
+                                        "type": "string"
+                                    },
+                                    "long_description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/{id}": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get question by id",
+                "description": "Get question by id ",
+                "operationId": "questionGetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Question id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "No User founded",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not founded"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/questions/{id}/choices": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Add choices to a question",
+                "description": "Add choices to a question",
+                "operationId": "Questions",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Question id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Add choices to a question",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "label"
+                                ],
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "is_correct": {
+                                        "type": "integer"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/questions/create": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Create questions and choices",
+                "description": "Create questions and choices ",
+                "operationId": "question",
+                "requestBody": {
+                    "description": "Create questions with choices",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "data"
+                                ],
+                                "properties": {
+                                    "data": {
+                                        "type": "json",
+                                        "example": "REPLACE BY a valide json array of QUESTION(short_description, long_description,typ). EACH QUESTION Contains array of CHOICES(label,weignt,comment)"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
                                         }
                                     },
                                     "type": "object"
@@ -266,28 +685,18 @@
         }
     },
     "components": {
-        "responses": {
-            "200": {
-                "description": "Success",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "message": {
-                                    "type": "json",
-                                    "example": "[]"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            },
-            "204": {
-                "description": "Location Added",
-                "content": {
-                    "application/json": {
-                        "schema": {}
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "http",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/COVID-19-selt-test/public/oauth/authorize",
+                        "tokenUrl": "http://localhost/COVID-19-selt-test/public/oauth/token",
+                        "refreshUrl": "http://localhost/COVID-19-selt-test/public/token/refresh",
+                        "scopes": []
                     }
                 }
             }

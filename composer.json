@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "darkaonline/l5-swagger": "^8.0",
+        "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,7 +18,7 @@
         "laravel/helpers": "^1.3",
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
-        "ext-json": "*"
+        "nesbot/carbon": "^2.41"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

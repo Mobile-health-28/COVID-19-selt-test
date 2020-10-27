@@ -5,7 +5,14 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'L5 Swagger UI',
+                \App\Http\Middleware\EncryptCookies::class,
+                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                \Illuminate\Session\Middleware\StartSession::class,
+                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                \App\Http\Middleware\VerifyCsrfToken::class,
+                \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+                'title' => 'COVID-19 Self test  API',
             ],
 
             'routes' => [
@@ -51,16 +58,7 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'auth:api' => [
-                    \App\Http\Middleware\EncryptCookies::class,
-                    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-                    \Illuminate\Session\Middleware\StartSession::class,
-                    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-                    \App\Http\Middleware\VerifyCsrfToken::class,
-                    \Illuminate\Routing\Middleware\SubstituteBindings::class,
-                    \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
-                    'auth',
-                ],
+                'api' => [],
                 'asset' => [],
                 'docs' => [],
                 'oauth2_callback' => [],
@@ -127,12 +125,12 @@ return [
                 ],
                 */
 
-                /* Open API 3.0 support
+                //Open API 3.0 support
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
                     'in' => 'header',
-                    'scheme' => 'https',
+                    'scheme' => 'http',
                     'flows' => [
                         "password" => [
                             "authorizationUrl" => config('app.url') . '/oauth/authorize',
@@ -142,7 +140,7 @@ return [
                         ],
                     ],
                 ],
-                */
+                
             ],
             'security' => [
                 /*
@@ -200,8 +198,8 @@ return [
         /*
          * Uncomment to add constants which can be used in annotations
          */
-        // 'constants' => [
-        // 'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
-        // ],
+         'constants' => [
+         'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://localhost/COVID-19-selt-test/public'),
+         ],
     ],
 ];

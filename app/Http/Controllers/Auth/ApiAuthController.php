@@ -14,46 +14,37 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-/**
- * @OA\Info(
- *    title="COVID self test application backend",
- *    version="1.0.0",
- * )
- */
 class ApiAuthController extends Controller
 {
     /**
-     * @OA\Post(
-     * path="/api/register",
-     * summary="Create account for new user",
-     * description="Create new account ",
-     * operationId="authRegister",
-     * tags={"auth"},
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Pass user payload",
-     *    @OA\JsonContent(
-     *       required={"email","password", "phone"},
-     *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
-     *       @OA\Property(property="phone", type="string", example="22996242162"),
-     *      @OA\Property(property="name", type="string", example="firmin Banignate"),
-     *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *       @OA\Property(property="persistent", type="boolean", example="true"),
-     *    ),
-     * ),
-     * @OA\Response(
-     *    response=422,
-     *    description="Bad request",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry but it seems like data are not correct, check sended data and retry again please")
-     *        )
-     *     )
-     * )
-     * @param Request $request
-     * @return Application|ResponseFactory|Response
-     */
-    public function register(Request $request)
-    {
+ * @OA\Post(
+ * path="/api/register",
+ * summary="Create account for new user",
+ * description="Create new account ",
+ * operationId="authRegister",
+ * tags={"auth"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user payload",
+ *    @OA\JsonContent(
+ *       required={"email","password", "phone"},
+ *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+ *       @OA\Property(property="phone", type="string", example="22996242162"),
+ *      @OA\Property(property="name", type="string", example="firmin Banignate"),
+ *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+ *       @OA\Property(property="persistent", type="boolean", example="true"),
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=422,
+ *    description="Bad request",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Sorry but it seems like data are not correct, check sended data and retry again please")
+ *        )
+ *     )
+ * )
+ */
+    public function register (Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'phone' => 'required|string|min:8|unique:users',
@@ -132,44 +123,93 @@ class ApiAuthController extends Controller
         }
     }
 
-    /**
-     * @OA\Post(
-     * path="/api/logout",
-     * summary="Sign out",
-     * description="Log out connected user",
-     * operationId="authLogout",
-     * tags={"auth"},
-     * @OA\RequestBody(
-     *    required=true,
-     *    description="Log  the user out",
-     *    @OA\JsonContent(
-     *       required={"user_id"},
-     *     @OA\Property(property="user_id", type="string")
-     *    ),
-     * ),
-     * @OA\Response(
-     *    response=422,
-     *    description="No user founded",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="User not found")
-     *        )
-     *     )
-     * )
-     * @param Request $request
-     * @return Application|ResponseFactory|Response
-     */
-    public function logout(Request $request)
-    {
-        $token = str_limit(explode(' ', $request->header('Authorization'))[1], 100,'');
-        $validApi = Auth::guard('api')->validate(['api_token' => $token]);
-        if($validApi) {
-            $user = User::where(['api_token' => $token])->firstOrFail();
-            $user['api_token'] = null;
-            $user->update();
-            $response = ['message' => 'You have been successfully logged out!'];
-            return response($response, 200);
-        } else {
-            return response(["message" => "Not logged in"], 200);
-        }
+/**
+ * @OA\Get(
+ * path="/api/user/{id}",
+ * summary="Get user infos",
+ * description="Get user's infos",
+ * operationId="userDetail",
+ * tags={"auth"},
+ * security={ {"bearer": {} }},
+ * @OA\Parameter(
+ *    description="User's Id",
+ *    in="path",
+ *    name="id",
+ *    required=true,
+ *    example="1",
+ *    @OA\Schema(
+ *       type="integer",
+ *       format="int64"
+ *    )
+ * ),
+ * * @OA\Response(
+ *    response=422,
+ *    description="No User founded",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="User not founded")
+ *        )
+ *     )
+ * )
+ */
+public function getByToken (Request $request,$id) {
+   
+
+    $user = User::find($id);
+    if ($user) {
+        return $user;
+    } else {
+        $response = ["message" =>'User does not exist'];
+        return response($response, 422);
+    }
+}
+
+      /**
+ * @OA\Post(
+ * path="/api/logout",
+ * summary="Sign out",
+ * description="Log out connected user",
+ * operationId="authLogout",
+ * tags={"auth"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Log  the user out",
+ *    @OA\JsonContent(
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=404,
+ *    description="No user founded",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="User not found")
+ *        )
+ *     )
+ * )
+ */
+    public function logout (Request $request) {
+        $token = $request->user()->token();
+        $token->revoke();
+        $response = ['message' => 'You have been successfully logged out!'];
+        return response($response, 200);
+    }
+  /**
+ * @OA\Get(
+ * path="/api/users",
+ * summary="Get all users",
+ * description="Get all users",
+ * operationId="userGetAll",
+ * tags={"auth"},
+ * security={ {"bearer": {} }},
+ * * @OA\Response(
+ *    response=422,
+ *    description="No User founded",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Users not founded")
+ *        )
+ *     )
+ * )
+ */
+
+    public function getUsers(){
+        return User::all();
     }
 }

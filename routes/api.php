@@ -18,19 +18,40 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['cors', 'json.response'],'namespace'=>'App\Http\Controllers\Auth'], function () {
+Route::group(['middleware' => ['api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
 
     // public routes
     Route::post('/login', 'ApiAuthController@login')->name('login.api');
     Route::post('/register','ApiAuthController@register')->name('register.api');
     Route::post('/logout', 'ApiAuthController@logout')->name('logout.api')->middleware('auth:api');
-
+    Route::get('/user/{id}', 'ApiAuthController@getByToken')->name('profile.api');
     // ...
 
 });
+Route::group(['middleware' => ['auth:api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
 
 Route::group(['middleware' => ['auth:api', 'cors', 'json.response'], 'namespace'=>'App\Http\Controllers'], function(){
     Route::resource('location', "LocationTracker")->except([
         'update', 'edit', 'create', 'destroy'
     ]);
+});
+
+    Route::get('/user/{id}', 'ApiAuthController@getByToken')->name('profile.api');
+    Route::get('/users', 'ApiAuthController@getUsers')->name('users.api');
+  
+
+});
+Route::group(['middleware' => [ 'auth:api'],'namespace'=>'App\Http\Controllers\api\v1'], function () {
+
+   Route::resource('question', 'CovidTestQuestionController');
+   Route::post('/questions/create', 'CovidTestQuestionController@loaFromJson')->name('import.api');
+   Route::post('/questions/{id}/choices', 'CovidTestQuestionController@addChoices')->name('addChoice.api');
+   Route::get('/questions/{id}', 'CovidTestQuestionController@getByQuestionId')->name('getQuestion.api');
+
+   Route::resource('selftest', 'CovidTestController');
+
+   Route::post('/questions/endtest/{id}', 'CovidTestController@endSession')->name('endTest.api');
+   Route::post('/questions/answers', 'CovidTestController@sendAnswers')->name('senAswers.api');
+   Route::post('/questions/{id}/answer', 'CovidTestController@sendAnswer')->name('endTest.api');
+
 });
