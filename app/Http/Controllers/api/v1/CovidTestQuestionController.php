@@ -142,6 +142,7 @@ public function getByQuestionId(Request $request,$id)
  *       @OA\Property(property="label", type="string"),
  *       @OA\Property(property="is_correct", type="integer"),
  *       @OA\Property(property="comment", type="string"),
+ *  @OA\Property(property="weigth", type="string"),
  *
  *    ),
  * ),
@@ -166,11 +167,61 @@ public function addChoices(ChoiceRequest $request, $id)
     if($request->validated())
     $data=["label"=>$request->label,
     "question_id"=>$request->question_id,
-    "weght"=>isset($request->weight)?$request->weight:0,
+    "weight"=>isset($request->weight)?$request->weight:0,
     "comment"=>isset($request->comment)?$request->comment:'',
 
 ];
 Choice::create($data);
+   return Question::with("choices")->find($id);
+
+}
+  /**
+ * @OA\Post(
+ * path="/api/choices/{id}/update",
+ * summary="Update choices ",
+ * description="Update choices",
+ * operationId="Choices",
+ * tags={"Questions"},
+ *  @OA\Parameter(
+ *    required=true,
+ *    name="id",
+ *    in="path",
+ *    description="Choice id",
+ * ),
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Update choices",
+ *    @OA\JsonContent(
+ *       required={"label"},
+ *       @OA\Property(property="question_id", type="string"),
+ *       @OA\Property(property="label", type="string"),
+ *       @OA\Property(property="weight", type="integer"),
+ *       @OA\Property(property="comment", type="string"),
+ *  @OA\Property(property="weigth", type="string"),
+ *
+ *    ),
+ * ),
+ * @OA\Response(
+ *    response=422,
+ *    description="Bad request",
+ *    @OA\JsonContent(
+ *       @OA\Property(property="message", type="string", example="Bad request")
+ *        )
+ *     )
+ * )
+ */
+public function updateChoices(ChoiceRequest $request, $id)
+{
+    $choice=Choice::find($id);
+    if(!$choice)
+    return response(404,["message"=>"Not fouded"]);
+    $data=["label"=>$request->label?$request->label:$choice->label,
+    "question_id"=>$request->question_id?$request->question_id:$choice->question_id,
+    "weight"=>isset($request->weight)?$request->weight:$choice->weight,
+    "comment"=>isset($request->comment)?$request->comment:$choice->comment,
+
+];
+Choice::update($data);
    return Question::with("choices")->find($id);
 
 }

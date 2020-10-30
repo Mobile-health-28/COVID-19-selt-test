@@ -700,6 +700,76 @@
                                     },
                                     "comment": {
                                         "type": "string"
+                                    },
+                                    "weigth": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Bad request"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/choices/{id}/update": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Update choices ",
+                "description": "Update choices",
+                "operationId": "Choices",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Choice id",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update choices",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "label"
+                                ],
+                                "properties": {
+                                    "question_id": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "weight": {
+                                        "type": "integer"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "weigth": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

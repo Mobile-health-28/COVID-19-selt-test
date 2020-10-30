@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Console;
+namespace App\Console\AddChoices;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -13,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+       // AddChoices::class,
+
     ];
 
     /**
