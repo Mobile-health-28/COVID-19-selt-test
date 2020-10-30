@@ -109,12 +109,16 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "firminapp@gmail.com"
+                                        "example": "user1@mail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "passepasse"
+                                        "example": "PassWord12345"
+                                    },
+                                    "persistent": {
+                                        "type": "boolean",
+                                        "example": "true"
                                     }
                                 },
                                 "type": "object"
@@ -197,17 +201,20 @@
                 "description": "Log out connected user",
                 "operationId": "authLogout",
                 "requestBody": {
-                    "description": "Log  the user out",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "user_id"
-                                ],
                                 "properties": {
-                                    "user_id": {
-                                        "type": "string"
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "firminapp@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "passepasse"
                                     }
                                 },
                                 "type": "object"
@@ -266,6 +273,91 @@
                         "bearer": []
                     }
                 ]
+            }
+        },
+        "/api/location": {
+            "get": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Returns all previous locations visited",
+                "description": "Endpoint used to get all visited locations",
+                "operationId": "authLocationGet",
+                "requestBody": {
+                    "description": "Will return objects containing the location details",
+                    "required": false
+                },
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission Denied"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Add a new location visited",
+                "description": "Endpoint used to add new visited location after spending at-least an hour in the vicinity",
+                "operationId": "authLocationPost",
+                "requestBody": {
+                    "description": "Location data payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "longitude",
+                                    "latitude"
+                                ],
+                                "properties": {
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "32.01547"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": "-2.01547"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "403": {
+                        "description": "Not Authorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Permission Denied"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/selftest": {
@@ -685,6 +777,32 @@
         }
     },
     "components": {
+        "responses": {
+            "200": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "json",
+                                    "example": "[]"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "204": {
+                "description": "Location Added",
+                "content": {
+                    "application/json": {
+                        "schema": {}
+                    }
+                }
+            }
+        },
         "securitySchemes": {
             "passport": {
                 "type": "oauth2",
