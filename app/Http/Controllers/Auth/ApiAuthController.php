@@ -158,10 +158,11 @@ public function getByToken (Request $request,$id) {
  * operationId="authLogout",
  * tags={"auth"},
  * @OA\RequestBody(
- *    required=true,
- *    description="Log  the user out",
- *    @OA\JsonContent(
- *    ),
+ *   required=true,
+ *   required={"email","password"},
+ *       @OA\Property(property="email", type="string", format="email", example="firminapp@gmail.com"),
+ *       @OA\Property(property="password", type="string", format="password", example="passepasse"),
+ *
  * ),
  * @OA\Response(
  *    response=404,
