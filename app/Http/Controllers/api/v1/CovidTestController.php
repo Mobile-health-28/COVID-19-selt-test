@@ -132,10 +132,9 @@ public function sendAnswers(Request $request){
     {
         $data=[
             "test_session_id"=>$session_id,
-            "user_id"=>auth('api')->user()->id,
+            "user_id"=>Auth::user()->id,
             "question_id"=>$answers["question_id"],
             "choice_id"=>$answers["choice_id"],
-
         ];
         UserChoice::create($data);
     }
