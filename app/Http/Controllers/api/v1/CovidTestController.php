@@ -36,7 +36,7 @@ class CovidTestController extends Controller
     {
         
         
-        $session_data=["user_id"=>auth('api')->user()->id,
+        $session_data=["user_id"=>Auth::user()->id,
         "started_at"=>Carbon::now()];
         $test=TestSession::create($session_data);
         return response()->json(["session"=>$test,"questions"=>Question::with("choices")->get() ],200);
