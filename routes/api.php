@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth:api', 'cors', 'json.response'], 'namespace'
 Route::group(['middleware' => ['auth:api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
 
     Route::get('/user/{id}', 'ApiAuthController@getByToken')->name('profile.api');
-    Route::get('/users', 'ApiAuthController@getUsers')->name('users.api');
+    Route::get('/users/all', 'ApiAuthController@getUsers')->name('users.api');
   
 
 });
