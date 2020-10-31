@@ -28,13 +28,12 @@ Route::group(['middleware' => ['api'],'namespace'=>'App\Http\Controllers\Auth'],
     // ...
 
 });
-Route::group(['middleware' => ['auth:api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
-
 Route::group(['middleware' => ['auth:api', 'cors', 'json.response'], 'namespace'=>'App\Http\Controllers'], function(){
     Route::resource('location', "LocationTracker")->except([
         'update', 'edit', 'create', 'destroy'
     ]);
 });
+Route::group(['middleware' => ['auth:api'],'namespace'=>'App\Http\Controllers\Auth'], function () {
 
     Route::get('/user/{id}', 'ApiAuthController@getByToken')->name('profile.api');
     Route::get('/users', 'ApiAuthController@getUsers')->name('users.api');

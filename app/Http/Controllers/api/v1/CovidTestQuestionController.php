@@ -218,9 +218,7 @@ public function updateChoices(ChoiceRequest $request, $id)
     $data=["label"=>$request->label?$request->label:$choice->label,
     "question_id"=>$request->question_id?$request->question_id:$choice->question_id,
     "weight"=>isset($request->weight)?$request->weight:$choice->weight,
-    "comment"=>isset($request->comment)?$request->comment:$choice->comment,
-
-];
+    "comment"=>isset($request->comment)?$request->comment:$choice->comment];
 Choice::update($data);
    return Question::with("choices")->find($id);
 

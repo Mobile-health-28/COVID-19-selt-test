@@ -58,7 +58,7 @@ class ApiAuthController extends Controller
         $request['remember_token'] = Str::random(10);
         $user = User::create($request->toArray());
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $response = ['token' => str_limit($token, 100, '')];
+        $response = ['token' => str_limit($token, 100, ''),"user"=>$user];
         return response($response, 200);
     }
 
@@ -106,7 +106,7 @@ class ApiAuthController extends Controller
                     $token = $user->createToken('Laravel Password Grant Client')->accessToken;
                     $user['api_token'] = str_limit($token, 100, '');
                     $user->update();
-                    $response = ['token' => str_limit($token, 100, '')];
+                    $response = ['token' => str_limit($token, 100, ''), "user"=>$user];
                     if (Auth::check()) {
                         return response($response, 200);
                     } else
@@ -199,7 +199,6 @@ public function getByToken (Request $request,$id) {
  * description="Get all users",
  * operationId="userGetAll",
  * tags={"auth"},
- * security={ {"bearer": {} }},
  * * @OA\Response(
  *    response=422,
  *    description="No User founded",
