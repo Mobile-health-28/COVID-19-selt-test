@@ -52,6 +52,6 @@ Route::group(['middleware' => [ 'auth:api'],'namespace'=>'App\Http\Controllers\a
 
    Route::post('/questions/endtest/{id}', 'CovidTestController@endSession')->name('endTest.api');
    Route::post('/questions/answers', 'CovidTestController@sendAnswers')->name('senAswers.api');
-   Route::post('/questions/{id}/answer', 'CovidTestController@sendAnswer')->name('endTest.api');
+   Route::post('/questions/{id}/answer', 'CovidTestController@sendAnswer')->name('answer.api');
 
 });
