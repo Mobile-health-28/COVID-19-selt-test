@@ -8,6 +8,7 @@ use App\Models\TestSession;
 use App\Models\Question;
 use App\Models\UserChoice;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class CovidTestController extends Controller
 {
     /**
