@@ -1,0 +1,162 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "covid19": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/covid19",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets/fonts/font-awesome/fonts",
+              "src/assets/fonts/flag-icon-css/flags/1x1",
+              "src/assets/fonts/flag-icon-css/flags/4x3",
+              "src/assets/fonts/feather/fonts",
+              "src/assets"
+            ],
+            "styles": [
+              "src/assets/fonts/font-awesome/css/font-awesome.css",
+              "src/assets/fonts/feather/iconfont.css",
+              "src/assets/fonts/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/css/plugins/animate/animate.css",
+              "src/assets/css/plugins/forms/form-inputs-groups.css",
+              "src/assets/css/plugins/forms/wizard.css",
+              "src/assets/css/plugins/extensions/toastr.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/bootstrap-extended.css",
+              "src/assets/css/colors.css",
+              "src/assets/css/components.css",
+              "src/assets/css/themes/dark-layout.css",
+              "src/assets/css/themes/semi-dark-layout.css",
+              "src/assets/css/core/menu/menu-types/vertical-menu.css",
+              "src/assets/css/core/colors/palette-gradient.css",
+              "src/styles.scss"
+            ],
+            "scripts": [
+              "src/assets/vendors/js/vendors.min.js",
+              "src/assets/js/core/libraries/jquery.min.js",
+              "src/assets/js/core/libraries/bootstrap.min.js",
+              "src/assets/vendors/js/vendors.min.js",
+              "src/assets/js/core/app-menu.js",
+              "src/assets/js/core/app.js",
+              "src/assets/js/scripts/components.min.js",
+              "src/assets/js/scripts/customizer.min.js",
+              "src/assets/js/scripts/footer.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "covid19:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "covid19:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "covid19:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "covid19:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "covid19:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "covid19",
+  "cli": {
+    "analytics": "fa56b5ba-2328-4a14-a918-fab61681478c"
+  }
+}
