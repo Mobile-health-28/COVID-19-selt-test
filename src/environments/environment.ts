@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl: 'http://covidtest.monbuz.net:8088/api',
+  login: '/login',
+  logout: '/logout',
+  register: '/register',
+  // get_questions: '/question',
+  // get_question: apiBaseUrl + '/questions/',
+  // get_choices : '/choices', /* url/questions/id/choices */
+
 };
 
 /*

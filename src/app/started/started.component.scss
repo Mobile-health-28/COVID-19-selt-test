@@ -35,3 +35,14 @@ $color-gold: gold;
     }
   }
 }
+
+.img {
+  width:  330px;
+  height: 330px;
+  background-size: cover;
+}
+
+.warning {
+  color: #1e1e1e !important;
+  background-color: $color-gold !important;
+}

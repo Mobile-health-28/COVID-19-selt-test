@@ -1,15 +1,39 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent,SignupComponent ,StartedComponent} from './shared/pages';
-import { routesName } from './shared/app.config';
- const routes: Routes = [
+import { StartedComponent} from './shared/pages';
+import { AppComponent } from './app.component';
 
-  { path: routesName.login.p, component: LoginComponent }, 
-  { path: routesName.signup.p, component: SignupComponent }, 
-  { path: routesName.started.p, component: StartedComponent },
-  { path: '', redirectTo: routesName.started.p,  pathMatch: 'full'}
-]; 
+const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+    children: [
+      {
+        path: 'welcome',
+        component: StartedComponent
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: '',
+        redirectTo: 'welcome',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: '404-page',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

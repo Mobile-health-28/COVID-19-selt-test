@@ -25,12 +25,41 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
+              "src/assets/fonts/font-awesome/fonts",
+              "src/assets/fonts/flag-icon-css/flags/1x1",
+              "src/assets/fonts/flag-icon-css/flags/4x3",
+              "src/assets/fonts/feather/fonts",
               "src/assets"
             ],
             "styles": [
+              "src/assets/fonts/font-awesome/css/font-awesome.css",
+              "src/assets/fonts/feather/iconfont.css",
+              "src/assets/fonts/flag-icon-css/css/flag-icon.min.css",
+              "src/assets/css/plugins/animate/animate.css",
+              "src/assets/css/plugins/forms/form-inputs-groups.css",
+              "src/assets/css/plugins/forms/wizard.css",
+              "src/assets/css/plugins/extensions/toastr.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/bootstrap-extended.css",
+              "src/assets/css/colors.css",
+              "src/assets/css/components.css",
+              "src/assets/css/themes/dark-layout.css",
+              "src/assets/css/themes/semi-dark-layout.css",
+              "src/assets/css/core/menu/menu-types/vertical-menu.css",
+              "src/assets/css/core/colors/palette-gradient.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendors/js/vendors.min.js",
+              "src/assets/js/core/libraries/jquery.min.js",
+              "src/assets/js/core/libraries/bootstrap.min.js",
+              "src/assets/vendors/js/vendors.min.js",
+              "src/assets/js/core/app-menu.js",
+              "src/assets/js/core/app.js",
+              "src/assets/js/scripts/components.min.js",
+              "src/assets/js/scripts/customizer.min.js",
+              "src/assets/js/scripts/footer.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,6 +121,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
             "scripts": []
