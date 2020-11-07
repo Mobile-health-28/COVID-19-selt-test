@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:teskovid/screens/signup_form.dart';
 
 import 'get_started.dart';
 
-class MainEntry extends StatefulWidget {
-  MainEntry({Key key, this.title}) : super(key: key);
+class Login extends StatefulWidget {
+  Login({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MainEntryState createState() => _MainEntryState();
+  _LoginState createState() => _LoginState();
 }
 
-class _MainEntryState extends State<MainEntry> {
+class _LoginState extends State<Login> {
   final _formLoginKey = GlobalKey<FormState>();
   final TextEditingController emailControl = TextEditingController();
   final TextEditingController passwordControl = TextEditingController();
@@ -83,6 +84,9 @@ class _MainEntryState extends State<MainEntry> {
                           return validateEmail(emailControl);
                         },
                         keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                        ),
                         decoration: new InputDecoration(
                           //icon goes here
                           prefixIcon: Icon(
@@ -120,6 +124,9 @@ class _MainEntryState extends State<MainEntry> {
                         },
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: showPassword,
+                        style: TextStyle(
+                          color: Color(0xffFFFFFF),
+                        ),
                         decoration: new InputDecoration(
                           // icon: Icon(),
                           prefixIcon: Icon(
@@ -175,11 +182,12 @@ class _MainEntryState extends State<MainEntry> {
                       ),
                       SizedBox(height: 15,),
 
-                      Align(
+                      Container(
+                        width: 230,
                         alignment: Alignment.centerLeft,
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                           color: Colors.amberAccent,
                           onPressed: () {
@@ -226,7 +234,8 @@ class _MainEntryState extends State<MainEntry> {
                               style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,
-                                  color: Colors.black
+                                  color: Colors.white,
+                                letterSpacing: 0.5
                               ),
                             ),
                           ),
@@ -242,43 +251,52 @@ class _MainEntryState extends State<MainEntry> {
                             endIndent: 150,
                             color: Colors.white,
                             thickness: 300,
+                            height: 50,
                           ),
-                          Text("OR",
+                          Text("or",
                           style: TextStyle(
                             color: Color(0xffFFFFFF),
                             fontSize: 13
-                          ),),
-                          // Divider(
-                          //   indent: 20,
-                          //   endIndent: 10,
-                          //   color: Colors.white,
-                          //   thickness: 100,
-                          // ),
+                            ),
+                          ),
+                          Divider(
+                            indent: 150,
+                            endIndent: 20,
+                            color: Colors.white,
+                            thickness: 100,
+                          ),
                         ],
                       ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          RaisedButton(
+                      Container(
+                        width: 220,
+                        alignment: Alignment.centerLeft,
+                        child: RaisedButton(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            color: Colors.amberAccent,
+                            color: Colors.white,
                             onPressed: () {
-
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder:(context) => Signup(),
+                                  )
+                              );
                             },
-                            child: Text(
-                                "Sign up",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.black
-                                ),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                  "Sign up",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    letterSpacing: 0.5,
+                                  ),
+                              ),
                             ),
                             padding: EdgeInsets.only(bottom: 5, top: 5),
                           ),
-                        ],
                       ),
 
 

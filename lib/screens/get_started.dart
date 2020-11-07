@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:teskovid/screens/main_entry.dart';
+import 'package:teskovid/screens/login_form.dart';
 
 class Starter extends StatefulWidget {
   Starter({Key key, this.title}) : super(key: key);
@@ -113,38 +113,38 @@ class _StarterState extends State<Starter> {
                     ),
                   ),
                   SizedBox(height: 150,),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: const EdgeInsets.all(4.0),
-                      padding: const EdgeInsets.all(20.0),
-                      child: new Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        color: Colors.amberAccent,
-                        child: FlatButton(
-                          // shape: ,
-                          onPressed: (){
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder:(context) => MainEntry(),
-                              )
-                            );
-                          },
-                          child: Text("GET STARTED",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              letterSpacing: 0.9,
-                            ),
-                          ),
 
+                  // ================== for button ======
+                  Container(
+                    width: 200,
+                    alignment: Alignment.centerLeft,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      color: Colors.amberAccent,
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:(context) => Login(),
+                            )
+                        );
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "GET STARTED",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
+                      padding: EdgeInsets.only(bottom: 5, top: 5),
                     ),
-                  )
-                ],
+                  ),                ],
               ),
           ),
           ),

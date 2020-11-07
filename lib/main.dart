@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teskovid/screens/get_started.dart';
-import 'package:teskovid/screens/main_entry.dart';
+import 'package:teskovid/screens/login_form.dart';
 
 void main() {
   runApp(MyApp());
