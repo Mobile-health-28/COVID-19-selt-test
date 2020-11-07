@@ -26,202 +26,266 @@ class _MainEntryState extends State<MainEntry> {
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                  "assets/images/humanHandWashing.png"
+              ),
+              alignment: Alignment.topCenter,
+              fit: BoxFit.fitWidth
+            ),
               gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [Color(0xff075404), Color(0xff919E08)]
               )
           ),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset("assets/images/humanHandWashing.png"),
-              Container(
-                // width: 100,
-                // height: 400,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    child: _loginFormField()
-                  ),
-                ),
-              )
-            ],
-          ),
+          child: Align(
+                 alignment: Alignment.bottomCenter,
+                   child: _loginFormField()
+               )
         ),
     );
   }
 
 
   Widget _loginFormField() {
-    return Form(
-        key: _formLoginKey,
-        child: SizedBox(
-            width: 344,
-            child: Column(
-              children: [
-                SizedBox(height: 5,),
-                /*======================================*/
+    return Container(
+        width: 600,
+        height: 400,
+        padding: EdgeInsets.all(30),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Color(0xff075404), Color(0xff919E08)]
+            ),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(80.0),
+                topRight: Radius.circular(80.0)
+            )
+        ),
+        child: Form(
+              key: _formLoginKey,
+              child: SizedBox(
+                  width: 344,
+                  child: Column(
+                    children: [
+                      SizedBox(height: 5,),
+                      /*======================================*/
 
-                /// Email input form
-                TextFormField(
-                  controller: emailControl,
-                  validator: (emailControl) {
-                    if (emailControl.isEmpty) {
-                      return 'Please enter email';
-                    }
-                    return validateEmail(emailControl);
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: new InputDecoration(
-                    //icon goes here
-                    contentPadding: EdgeInsets.zero,
-                    labelText: "Username/Email",
-                    hintText: "(eg. joe@work.com)",
-                    hintStyle: TextStyle(
-                      color: Colors.lime,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12,
-                    ),
-                    labelStyle: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal
-                    ),
-                  ),
-                ),
-                SizedBox(height: 5,),
+                      /// Email input form
+                      TextFormField(
+                        controller: emailControl,
+                        validator: (emailControl) {
+                          if (emailControl.isEmpty) {
+                            return 'Please enter email';
+                          }
+                          return validateEmail(emailControl);
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: new InputDecoration(
+                          //icon goes here
+                          prefixIcon: Icon(
+                              Icons.account_box_outlined,
+                              color: Color(0xffFFFFFF),
+                            ),
+                          contentPadding: EdgeInsets.zero,
+                          labelText: "Username/Email",
+                          hintText: "(eg. joe@work.com)",
+                          hintStyle: TextStyle(
+                            color: Colors.lime,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 14,
+                          ),
+                          labelStyle: TextStyle(
+                            color: Color(0xffFFFFFF),
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal
+                          ),
 
-                /*======================================*/
-
-                /// Password input form
-                TextFormField(
-                  controller: passwordControl,
-                  validator: (passwordControl) {
-                    if (passwordControl.isEmpty) {
-                      return 'Please enter password';
-                    }
-                    return validatePassword(passwordControl);
-                  },
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: showPassword,
-                  decoration: new InputDecoration(
-                    // icon: Icon(),
-                    contentPadding: EdgeInsets.zero,
-                    labelText: "Password",
-                    labelStyle: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
-                      },
-                      icon: Icon(
-                        showPassword ? Icons.visibility_off : Icons.visibility,
-                        size: 15,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                      SizedBox(height: 5,),
 
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                      onPressed: () {
-                        // Navigator.of(context).push(
-                        // MaterialPageRoute(
-                        // builder: (context) => ResetPassword(),
-                        // ),
-                        // );
-                      },
-                      child: Row(
-                        textDirection: TextDirection.rtl,
-                        children: [
-                          Text(
-                            "Forgot Password",
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12,
-                              color: Colors.black,
+                      /*======================================*/
+
+                      /// Password input form
+                      TextFormField(
+                        controller: passwordControl,
+                        validator: (passwordControl) {
+                          if (passwordControl.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          return validatePassword(passwordControl);
+                        },
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: showPassword,
+                        decoration: new InputDecoration(
+                          // icon: Icon(),
+                          prefixIcon: Icon(
+                            Icons.lock_outlined,
+                            color: Color(0xffFFFFFF),
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          labelText: "Password",
+                          labelStyle: TextStyle(
+                            color: Color(0xffFFFFFF),
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showPassword = !showPassword;
+                              });
+                            },
+                            icon: Icon(
+                              showPassword ? Icons.visibility_off : Icons.visibility,
+                              size: 15,
+                              color: Color(0xffFFFFFF),
+
                             ),
                           ),
-                        ],
-                      )
-                  ),
-                ),
-                SizedBox(height: 35,),
-
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {
-                      final form = _formLoginKey.currentState;
-                      if (form.validate()) {
-                        form.save();
-
-                        setState(() {
-                          // registeredUser = UserService.loginUser(
-                          //    email: emailControl.text,
-                          //    password: passwordControl.text,
-                          // );
-                        });
-                        //   showDialog(
-                        //       context: context,
-                        //       builder: (_) => AlertDialog(title: _success()),
-                        //       // barrierColor: Colors.white,
-                        //       useRootNavigator: true,
-                        // );
-                      }
-
-                      // }
-                      else {
-                        return showDialog(
-                          context: context,
-                          builder: (_) =>
-                              AlertDialog(
-                                title: Text("Invalid Login"),
-                              ),
-                        );
-                      }
-                      // if(!isloading){
-                      //     Navigator.of(context).push(
-                      //         MaterialPageRoute(
-                      //            builder: (context) => Dashboard(),
-                      //         )
-                      //     );
-                      // }
-                    },
-                    child: Text(
-                      "Log in",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 22,
-                          color: Colors.black
+                        ),
                       ),
-                    ),
-                  ),
-                ),
 
-                SizedBox(height: 50,),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    RaisedButton(
-                      onPressed: () {
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                            onPressed: () {
+                              // Navigator.of(context).push(
+                              // MaterialPageRoute(
+                              // builder: (context) => ResetPassword(),
+                              // ),
+                              // );
+                            },
+                            child: Row(
+                              textDirection: TextDirection.rtl,
+                              children: [
+                                Text(
+                                  "Forgot Password",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 13,
+                                    color: Color(0xffFFFFFF),
+                                  ),
+                                ),
+                              ],
+                            )
+                        ),
+                      ),
+                      SizedBox(height: 15,),
 
-                      },
-                      child: Text("Sign up"),
-                      color: Colors.white,
-                      padding: EdgeInsets.only(bottom: 5, top: 5),
-                    ),
-                  ],
-                ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          color: Colors.amberAccent,
+                          onPressed: () {
+                            final form = _formLoginKey.currentState;
+                            if (form.validate()) {
+                              form.save();
+
+                              setState(() {
+                                // registeredUser = UserService.loginUser(
+                                //    email: emailControl.text,
+                                //    password: passwordControl.text,
+                                // );
+                              });
+                              //   showDialog(
+                              //       context: context,
+                              //       builder: (_) => AlertDialog(title: _success()),
+                              //       // barrierColor: Colors.white,
+                              //       useRootNavigator: true,
+                              // );
+                            }
+
+                            // }
+                            else {
+                              return showDialog(
+                                context: context,
+                                builder: (_) =>
+                                    AlertDialog(
+                                      title: Text("Invalid Login"),
+                                    ),
+                              );
+                            }
+                            // if(!isloading){
+                            //     Navigator.of(context).push(
+                            //         MaterialPageRoute(
+                            //            builder: (context) => Dashboard(),
+                            //         )
+                            //     );
+                            // }
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Log in",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 20,
+                                  color: Colors.black
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 30,
+                      child: Row(
+                        children: [
+                          Divider(
+                            indent: 20,
+                            endIndent: 150,
+                            color: Colors.white,
+                            thickness: 300,
+                          ),
+                          Text("OR",
+                          style: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontSize: 13
+                          ),),
+                          // Divider(
+                          //   indent: 20,
+                          //   endIndent: 10,
+                          //   color: Colors.white,
+                          //   thickness: 100,
+                          // ),
+                        ],
+                      ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            color: Colors.amberAccent,
+                            onPressed: () {
+
+                            },
+                            child: Text(
+                                "Sign up",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black
+                                ),
+                            ),
+                            padding: EdgeInsets.only(bottom: 5, top: 5),
+                          ),
+                        ],
+                      ),
 
 
-              ],
-            )
-        )
+                    ],
+                  )
+              )
+          ),
     );
   }
 }
