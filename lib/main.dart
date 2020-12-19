@@ -11,13 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Teskovid',
       theme: ThemeData(
         fontFamily: 'Sans Serif',
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Starter(title: 'Covid 19 Self Test'),
+      home: MyStarter(),
     );
   }
 }

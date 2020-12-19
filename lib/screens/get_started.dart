@@ -4,6 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:teskovid/screens/login_form.dart';
 
+class MyStarter extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Sans Serif',
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Starter(title: 'Covid 19 Self Test'),
+    );
+  }
+
+}
+
+
 class Starter extends StatefulWidget {
   Starter({Key key, this.title}) : super(key: key);
 
@@ -40,7 +57,7 @@ class _StarterState extends State<Starter> {
                       padding: const EdgeInsets.all(25.0),
                       child: new Card(
                         elevation: 20,
-                        color: const Color(0xffFFFFFF).withOpacity(0.3),
+                        color: const Color(0xffFFFFFF).withOpacity(0.4),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(28),
                         ),
@@ -48,7 +65,6 @@ class _StarterState extends State<Starter> {
                             items: <Widget>[
                               Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-
                                   children: [
                                     listItems[0].imageValue,
                                     Text(
@@ -112,7 +128,7 @@ class _StarterState extends State<Starter> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 150,),
+                  SizedBox(height: 60,),
 
                   // ================== for button ======
                   Container(
@@ -126,7 +142,7 @@ class _StarterState extends State<Starter> {
                       onPressed: () {
                         Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder:(context) => Login(),
+                              builder:(context) => MyLogin(),
                             )
                         );
                       },
